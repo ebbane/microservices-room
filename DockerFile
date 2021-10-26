@@ -1,0 +1,4 @@
+FROM python:slim:bullseye
+RUN pip install -r requirements.txt
+
+RUN pip3 install paho-mqtt python-etcd
