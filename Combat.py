@@ -24,8 +24,8 @@ class Combat :
 
         def initCombat(self, Player1, Player2, timer):
 
-                init_position_x
-                init_position_y
+                self.init_position_x
+                self.init_position_y
                 timer(seconds)
 
 
