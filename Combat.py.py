@@ -37,11 +37,8 @@ class Combat :
         
         async def loop_afk():
                 await asyncio.sleep(1)
+                if not player.initmovement(key) :
+                        time.sleep(10)
+                        destroy(Combat)
                 await loop_afk
         asyncio.run(loop_afk())
-
-
-       # def afk(self, player, other):
-         #              if not player.initmovement(key) :
-         #                time.sleep(10)
-         #                destroy(Combat)
