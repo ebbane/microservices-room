@@ -4,8 +4,7 @@ class Player :
     self.id = 0
     self.name = string
     self.health = 100
-    self.pos_x = int
-    self.pos_y = 50
+    self.position_x = int
     self.backdash = int
     self.attack = bool
     self.guard = bool
@@ -14,10 +13,10 @@ class Player :
 
     def initmovement(self, key):  #function key_pressed
      if "q" in key:
-            self.pos_x -=25
+            self.position_x -=25
 
      if "d" in key:
-            self.pos_x +=25
+            self.position_x +=25
     
      if "s" in key:
             self.back +=50

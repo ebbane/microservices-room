@@ -9,8 +9,8 @@ class Combat :
         self.id_combat = int
         self.init_player = int
         self.init_player_position = int
-        self.init_taille_x = 400
-        self.init_taille_y = 1000
+        self.init_position_x = 400
+        self.init_position_y = 50
         self.seconds = 90
         self.score = int
 
@@ -24,8 +24,8 @@ class Combat :
 
         def initCombat(self, Player1, Player2, timer):
 
-                init_taille_x
-                init_taille_y
+                init_position_x
+                init_position_y
                 timer(seconds)
 
 
