@@ -1,3 +1,7 @@
+import Combat
+import Player
+import Mqtt
+
 Player1 = Player(id, name, position_x, position_y)
 Player2 = Player(id, name, position_x, position_y)
 Player.id = MQTT.add_id(player, id)
