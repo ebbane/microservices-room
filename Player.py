@@ -1,12 +1,14 @@
 class Player :
-    def__init__(self, id, name, pos_x, pos_y, health)
+    def__init__(self, id, name, pos_x, pos_y, score_)
 
     self.id = 0
     self.name = string
     self.health = 100
-    self.position_x = int
+    self.position_x = pos_x
+    self.position_y = pos_y
     self.attack = bool
     self.guard = bool
+    self.score = score_
 
 
 
@@ -33,12 +35,13 @@ class Player :
      pos_x += 20
      pos_y += 50
 
-    
-    def hit(self): 
+    def hit(self, other): 
 
-     if self.attack == True and hitbox.pos_x1 <= hitbox.pos_x2 and self.guard == False:
-         health -=25
+     if self.attack == True and self.hitbox.pos_x <= other.hitbox.pos_x and other.guard == False:
+         other.health -=25
          time.sleep(1);  #frame d'invulnerabilité
+
+
 
     def guard(self):
          for i in range(1):

@@ -1,16 +1,13 @@
 import time
-
+import asensio
 from Mqtt import MQTT
 
 class Combat :
-        def__init__(self, id_combat, init_taille_x, init_taille_y, seconds)
+        def__init__(self, id_combat, seconds)
 
 
         self.id_combat = int
         self.init_player = int
-        self.init_player_position = int
-        self.init_position_x = 400
-        self.init_position_y = 50
         self.seconds = 90
         self.score = int
 
@@ -22,25 +19,29 @@ class Combat :
 
 
 
-        def initCombat(self, Player1, Player2, timer):
+        def initCombat(self, p1x, p1y,p2x, p2y, timer):
 
-                self.init_position_x
-                self.init_position_y
                 timer(seconds)
 
 
 
-        def closeCombat(self, health, timer):
-                if Player.health == 0 and timer > 0 :
-                        self.score = 0
+        def closeCombat(self,pscore, phealth, timer):
+                if phealth == 0 and timer > 0 :
+                        pscore += 0
                 else :
-                        self.score = 1
+                        pscore += 1
 
                 if timer == 0 :
-                        self.score = 0
+                        pscore += 0
 
-                if not player.initmovement(key) :
-                        time.sleep(10)
-                        destroy(Combat)
+        
+        async def loop_afk():
+                await asyncio.sleep(1)
+                await loop_afk
+        asyncio.run(loop_afk())
 
-                destroy(Combat)
+
+       # def afk(self, player, other):
+         #              if not player.initmovement(key) :
+         #                time.sleep(10)
+         #                destroy(Combat)
