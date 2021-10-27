@@ -1,5 +1,3 @@
-import time
-
 class Player :
     def__init__(self, id, name, pos_x, pos_y, score_)
 

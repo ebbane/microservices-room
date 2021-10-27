@@ -1,6 +1,6 @@
 import time
 import asensio
-from MQTT import MQTT
+from Mqtt import MQTT
 
 class Combat :
         def__init__(self, id_combat, seconds)
