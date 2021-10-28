@@ -1,22 +1,18 @@
 import time
 import Player
 import asyncio
+from datetime import datetime
 
 class Combat :
-        def __init__(self, id_combat, seconds):
+        def __init__(self):
 
             self.player = []
             self.arena_size = 0
-            self.id_combat = int
-            self.init_player = int
             self.seconds = 90
-            self.score = int
             self.start_time = 0
             self.timer = 0
             self.afk_limit = 10
              
-
-    
             
         def increment_timer(self):
 
@@ -40,14 +36,16 @@ class Combat :
 
 
 
-        def closeCombat(self,pscore, phealth, timer):
-                if phealth == 0 and timer > 0 :
-                        pscore += 0
-                else :
-                        pscore += 1
+        def closeCombat(self, health, timer, player_rang):
+                if health == 0 and timer > 0 :
+                        # player.pscore = False
+                        # other.pscore += 1
+                        game_result = {'finish': True, 'equality': False, 'winner': player[player_rang], 'looser': player}
+                        self.send_topic('game/result' , game_result)
 
                 if timer == 0 :
-                        pscore += 0
+                        game_result = {'finish': True, 'equality': True, 'player1': player[player_rang], 'player2': player}
+                        self.send_topic('game/result' , game_result)
 
 
         def check_afk(self):
@@ -57,8 +55,15 @@ class Combat :
                   if (current_time - player.last_action).seconds > self.afk_limit:
                          self.players.remove(player)
 
-        def add_player(self, id, data):
+        def add_player(self, id, name):
              if len(self.players) < 2:
-                 self.players.append(Player(id, data))
-                 return True      
+                 self.players.append(Player(id, name))
+                 return True
              return False
+
+
+        def get_player(self, id):
+            for player in self.players:
+                if id == player.id:
+                    return player
+            return None

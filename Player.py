@@ -16,8 +16,8 @@ class Player :
         self.last_action = 0
 
 
-        def initmovement(self, key):  #function key_pressed
-             self.last_action = datetime.now()
+        def update_player(self, key):  #function key_pressed
+             player.last_action = datetime.now()
              if "q" in key:
                     self.position_x -=50
 
@@ -28,19 +28,19 @@ class Player :
                     self.position_x -=25
 
              if "k" in key:
-                    self.attack = true
+                    self.attack = True
 
              if "l" in key:
-                    self.guard = true
+                    self.guard = True
 
              if self.position_x > self.arena_size:
                     self.position_x = self.arena_size
 
              if self.position_x <= other.position_x :
                  self.position_x -= 20
-                    
+
      
-             return key
+             return { 'id' : self.id, 'health': self.health, 'position_x': self.position_x}
 
         def hitbox(self, player):      #set la hitbox
 
