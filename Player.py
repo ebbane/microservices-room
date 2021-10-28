@@ -47,9 +47,9 @@ class Player :
         self.attack = True
         if self.hitbox() <= other.hitbox() and not other.guard and not self.guard:
             other.health -=25
-                if other.health = 0
-                    return self.ko = True
-                return self.ko = False
+            if other.health == 0:
+                    return self.ko == True
+            return self.ko == False
             time.sleep(1)
             self.attack = False
 
