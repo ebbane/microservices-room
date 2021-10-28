@@ -12,16 +12,17 @@ class Combat :
         self.score = int
 
         def timer(seconds):
-                 print("Chrono : %ds" % seconde)
-                 for i in range(seconds): time.sleep(1)
-                 print("Fin")
+                        print("Chrono : %ds" % seconde)
+                        for i in range(seconds): time.sleep(1)
+                        print("Fin")
 
 
 
 
         def initCombat(self, p1x, p1y,p2x, p2y, timer):
 
-                timer(seconds)
+                
+          timer(seconds)
 
 
 

@@ -2,20 +2,29 @@ import logging
 import time
 from MQTT import * 
 
-topic="client/joueur2"
-payload2={'position': '54', 'health': '2'}
+
 
 class Room():
     def __init__(self):
-        # Linking messages to my application
-        def on_message_room_connexion(msg):
-            logging.info(f'Received message {msg}')
-            print(msg)
-            # msg.payload = 
-            msg.get('key')
+        pass
+    
+    def player_connexion(self, msg):
+        logging.info(f'Received message : {msg}')
+        # msg.payload = 
+            # msg.get('key')
+            # Création des joueur a partir des id
         
-        sig = signal('debug/test')
-        sig.connect(on_message_room_connexion)
+    def player1_action(self, msg):
+        logging.info(f'Received message : {msg}')
+        # Apelle fonction déplacement 
+        # set player = player1
+        
+    def player2_action(self, msg):
+        logging.info(f'Received message : {msg}')
+        # Apelle fonction déplacement 
+        # set player = player2
+       
+            
     
     # Sending a MQTT Message through blinker signals
     def send_topic(self, topic, payload):
@@ -23,11 +32,11 @@ class Room():
         sig.send({'topic': topic, 'body': payload})
         
     def position(self):
-        position2= {'player1_x': 'coucou2', 'player1_y': 25, 'player2_x': 100, 'player2_y': 150}
+        position2= {'player1_x': 150, 'player1_y': 200, 'player2_x': 100, 'player2_y': 150}
         self.send_topic('game/match', position2)
-        
-    def new_subscribe(self, topic):
-        self.client.subscribe(topic)
+                
+    
+            
 
 # --------------------------------------------------
 
@@ -36,7 +45,7 @@ def main():
 
     # ---------------------------------
     # Initializing MQTT
-    mqtt_client = MQTTClient(['debug/test'])
+    mqtt_client = MQTTClient(['room/connexion', 'room/joueur1', 'room/joueur2' ])
     mqtt_client.setup()
     mqtt_client.run()
 
@@ -44,6 +53,28 @@ def main():
     # TODO: Start my application
     app = Room()
     app.position()
+    
+    def listen_topic(self):
+        
+        def on_message_room_connexion(msg):
+            app.player_connexion(msg)        
+    
+        sig = signal('room/connexion')
+        sig.connect(on_message_room_connexion)
+        
+        def on_message_player1(msg):
+            app.player1_action(msg)        
+    
+        sig = signal('room/joueur1')
+        sig.connect(on_message_player1)
+        
+        def on_message_player2(msg):
+            app.player2_action(msg)        
+    
+        sig = signal('room/joueur2')
+        sig.connect(on_message_player2)
+        
+
 
     # ---------------------------------
     # Closing connection
