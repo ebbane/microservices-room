@@ -16,9 +16,11 @@ class Player :
         self.guard = False
         self.size_x = 120
         self.last_action = 0
+        self.ko = False
 
 
     def update(self, key):  #function key_pressed
+
        self.last_action = datetime.now()
 
        if "q" in key:
@@ -36,17 +38,19 @@ class Player :
      
        return key
 
-       def hitbox(self, player):      #set la hitbox
+    def hitbox(self):      #set la hitbox
 
-            return self.size_x + self.position_x
+       return self.size_x + self.position_x
 
-       async def hit(self, other):
-            
-             self.last_action = datetime.now()
-             self.attack = True
-             if self.hitbox.pos_x <= other.hitbox.pos_x and not other.guard and not self.guard:
-                  other.health -=25
-                  await asyncio.sleep(1)
-                  self.attack = False
+    def hit(self, other):
+        self.last_action = datetime.now()
+        self.attack = True
+        if self.hitbox() <= other.hitbox() and not other.guard and not self.guard:
+            other.health -=25
+                if other.health = 0
+                    return self.ko = True
+                return self.ko = False
+            time.sleep(1)
+            self.attack = False
 
        

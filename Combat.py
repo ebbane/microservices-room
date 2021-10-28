@@ -44,7 +44,6 @@ class Combat :
         def closeCombat(self,pscore, phealth, timer):
                 if phealth == 0 and timer > 0 :
                         pscore += 0
-                else :
                         pscore += 1
 
                 if timer == 0 :
@@ -52,7 +51,7 @@ class Combat :
 
 
         def check_afk(self):
-       
+             logging.info(f'AFK DETECTED : {id}')
              for player in self.players:
                   current_time = datetime.now()
                   if (current_time - player.last_action).seconds > self.afk_limit:
@@ -78,7 +77,7 @@ class Combat :
             player = self.get_player(id)
             if "k" in key:
                     other = None
-                    for iplayer in self.player:
+                    for iplayer in self.players:
                         other = iplayer
                         break
                     player.hit(other)
@@ -89,6 +88,7 @@ class Combat :
 
 
         def collider(self):
+            logging.info(f'check position1 : {position1} and position2 : {position2} and ARENA_SIZE : {ARENA_SIZE}')
             def is_colliding(player1, player2):
                 if abs(player2.position_x - player2.position_x) < 2 * player1.size_x:
                     return True
