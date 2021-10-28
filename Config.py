@@ -1,0 +1,1 @@
+ARENA_SIZE = 1000

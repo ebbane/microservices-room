@@ -1,12 +1,14 @@
 import time
 import asyncio
 from datetime import datetime
+from Config import ARENA_SIZE
+import logging
 
 class Player :
-    def __init__(self, id, name, pos_x, pos_y, size_x, last_action):
+    def __init__(self, id, name):
 
-        self.id = -1
-        self.name = ""
+        self.id = id
+        self.name = name
         self.health = 100
         self.position_x = 310
         self.position_y = 400
@@ -16,37 +18,29 @@ class Player :
         self.last_action = 0
 
 
-        def initmovement(self, key):  #function key_pressed
-             self.last_action = datetime.now()
-             if "q" in key:
-                    self.position_x -=50
+    def update(self, key):  #function key_pressed
+       self.last_action = datetime.now()
 
-             if "d" in key:
-                    self.position_x +=25
+       if "q" in key:
+            self.position_x -=50
+
+       if "d" in key:
+            self.position_x +=25
     
-             if "s" in key:
-                    self.position_x -=25
+       if "s" in key:
+            self.position_x -=25
 
-             if "k" in key:
-                    self.attack = true
-
-             if "l" in key:
-                    self.guard = true
-
-             if self.position_x > self.arena_size:
-                    self.position_x = self.arena_size
-
-             if self.position_x <= other.position_x :
-                 self.position_x -= 20
+       if "l" in key:
+            self.guard = True
                     
      
-             return key
+       return key
 
-        def hitbox(self, player):      #set la hitbox
+       def hitbox(self, player):      #set la hitbox
 
             return self.size_x + self.position_x
 
-        async def hit(self, other):
+       async def hit(self, other):
             
              self.last_action = datetime.now()
              self.attack = True
@@ -54,3 +48,5 @@ class Player :
                   other.health -=25
                   await asyncio.sleep(1)
                   self.attack = False
+
+       
