@@ -25,7 +25,7 @@ def main():
         data = { 'id': 3, 'pos_x': pos}
         game.update_player(data['id'], data)
         data = {'id': 4, 'key': 'k'}
-        game.update_player(data['id'], 'k)
+        game.update_player(data['id'], 'k')
         data = {'id': 3, 'key': 'l'}
         game.update_player(data['id'], 'l')
 
