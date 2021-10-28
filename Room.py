@@ -20,9 +20,9 @@ class Room():
     def on_player_action(self, msg):
         playerId = msg.get('id')   
         control = msg.get('control') 
-        new_data = self.iniinitmovement(playerId,control)
-        topic='client/players'
         
+        new_data = self.update_player(playerId,control)        
+        topic='client/players'        
         self.send_topic(topic, new_data)
                
             
