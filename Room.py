@@ -11,16 +11,11 @@ class Room():
     def on_player_connexion(self, msg):      
         
         player1_id = msg.get('joueur1').get('id') # Extract data from key
-        player1_name = msg.get('joueur1').get('nom')
-        player2_id = msg.get('joueur1').get('id')
-        player2_name = msg.get('joueur1').get('nom')
+        player1_name = msg.get('joueur1').get('nom')       
         
-        game = Combat() 
            
-        game.add_player(player1_id, player1_name) # set player 1 in player array
-        game.add_player(player2_id, player2_name) #  set player 2 in player array       
+        self.add_player(player1_id, player1_name) # set player 1 in player array    
         
-        game.launch_timer()
         
     def on_player_action(self, msg):
         playerId = msg.get('id')   
@@ -71,8 +66,9 @@ def main():
        
         
     listen_topic()
-    while True :
-        pass
+    game = Combat()
+    game.launch_timer() 
+    
     # mqtt_client.wait() 
 
 
