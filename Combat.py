@@ -1,6 +1,6 @@
 import time
 import asensio
-from MQTT import MQTT
+from Mqtt import MQTT
 
 class Combat :
         def__init__(self, id_combat, seconds)
@@ -12,17 +12,16 @@ class Combat :
         self.score = int
 
         def timer(seconds):
-                        print("Chrono : %ds" % seconde)
-                        for i in range(seconds): time.sleep(1)
-                        print("Fin")
+                 print("Chrono : %ds" % seconde)
+                 for i in range(seconds): time.sleep(1)
+                 print("Fin")
 
 
 
 
         def initCombat(self, p1x, p1y,p2x, p2y, timer):
 
-                
-          timer(seconds)
+                timer(seconds)
 
 
 
