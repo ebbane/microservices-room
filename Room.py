@@ -9,9 +9,9 @@ class Room():
         pass
     
     def on_player_connexion(self, msg):      
-        
-        player1_id = msg.get('joueur1').get('id') # Extract data from key
-        player1_name = msg.get('joueur1').get('nom')       
+        print(msg)
+        player1_id = msg.get('id') # Extract data from key
+        player1_name = msg.get('username')       
         
            
         self.add_player(player1_id, player1_name) # set player 1 in player array    
@@ -31,6 +31,10 @@ class Room():
         sig = signal('message')
         sig.send({'topic': topic, 'body': payload})
         
+            
+    # # Mettre écoute signaux qui vienne de game 
+    # sig = signal('game_?')
+    # sig.connect(send_topic('game/result', msg))
             
 
 # --------------------------------------------------
@@ -69,8 +73,10 @@ def main():
     game = Combat()
     game.launch_timer() 
     
+    # i=1
+    # while True :
+    #     i+=1
     # mqtt_client.wait() 
-
 
 
     # ---------------------------------

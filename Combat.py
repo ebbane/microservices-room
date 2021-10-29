@@ -11,8 +11,6 @@ class Combat :
     def __init__(self):
 
         self.players = []
-        self.id_combat = id_combat
-        self.seconds = seconds
         self.start_time = 0
         self.timer = 0
         self.afk_limit = 10
