@@ -12,13 +12,10 @@ class Combat :
         def __init__(self):
 
             self.players = []
-            # self.id_combat = id_combat
             self.start_time = 0
             self.timer = 0
             self.afk_limit = 40
             self.time_limit = 90
-
-    
             
         def increment_timer(self):
              time.sleep(1)
@@ -46,14 +43,10 @@ class Combat :
                 player.health = 100
             self.launch_timer()
 
-
-
-
         def launch_timer(self):
                 self.timer = 0
                 self.start_time = datetime.now()
                 self.increment_timer()
-
 
         def check_afk(self):
              for player in self.players:
@@ -69,14 +62,12 @@ class Combat :
                  return True      
              return False
 
-
         def get_player(self, id):
 
             for player in self.players:
                 if id == player.id:
                     return player
             return None
-
 
         def update_player(self, id, key):
             player = self.get_player(id)
@@ -94,8 +85,6 @@ class Combat :
             logging.info(f'Player {player.id} position {player.position_x}')
             return {'id' : id, 'position_x' : player.position_x, 'guard ' : player.guard, 'attack' : player.attack}
             
-
-
         def collider(self):
             def is_colliding(player1, player2):
                 p2_mirrored = ARENA_SIZE - player2.position_x

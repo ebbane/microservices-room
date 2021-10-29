@@ -3,8 +3,10 @@ import asyncio
 from datetime import datetime
 from Config import ARENA_SIZE
 import logging
+from blinker import signal
 
 class Player :
+     
     def __init__(self, id, name):
         self.id = id
         self.name = name
@@ -15,7 +17,6 @@ class Player :
         self.size_x = 125
         self.last_action = datetime.now
         self.ko = False
-
 
     def update(self, key):  #function key_pressed
 
@@ -36,7 +37,6 @@ class Player :
 
        return key
 
-
     def hit(self, other):
         self.last_action = datetime.now()
         self.attack = True
@@ -45,6 +45,8 @@ class Player :
           
           other.health -=25
           if other.health <= 0:
+               sig = signal('game_ended')
+               sig.send({ 'equality' : 'False', 'idUser_Win' : {self.id} , 'idUser_Los' : {other.id}})
                return True
           time.sleep(1)
           self.attack = False
