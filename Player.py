@@ -12,7 +12,7 @@ class Player :
         self.position_x = 50
         self.attack = False
         self.guard = False
-        self.size_x = 120
+        self.size_x = 125
         self.last_action = datetime.now
         self.ko = False
 
@@ -36,16 +36,15 @@ class Player :
 
        return key
 
-    def hitbox(self):      #set la hitbox
-
-       return self.size_x + self.position_x
 
     def hit(self, other):
         self.last_action = datetime.now()
         self.attack = True
-        if self.hitbox() <= other.hitbox() and not other.guard and not self.guard:
-            other.health -=25
-            if other.health <= 0:
+        logging.info(f'player {self.id} : position : {self.position_x} and other {other.id} position : {other.position_x}')
+        if abs(self.position_x - (ARENA_SIZE - other.position_x))<= 2 * self.size_x and not other.guard and not self.guard:
+          
+          other.health -=25
+          if other.health <= 0:
                return True
-            time.sleep(1)
-            self.attack = False
+          time.sleep(1)
+          self.attack = False

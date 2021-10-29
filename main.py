@@ -55,6 +55,10 @@ def main():
     id = 5
     data = { 'name': 'NotAdded'}
     game.add_player(id, data)
+    
+    # hit other
+    data = {'id': 3, 'key': 'k'}
+    game.update_player(data['id'], 'k')
 
     game.update_player(3, 'q')
     for i in range(0, 29):
@@ -62,6 +66,10 @@ def main():
 
     # Colliding with player
     game.update_player(4, 'd')
+    
+    # hit other
+    data = {'id': 3, 'key': 'k'}
+    game.update_player(data['id'], 'k')
 
     # game.update_player(3)
     # for pos in range(0, 10):

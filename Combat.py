@@ -83,10 +83,11 @@ class Combat :
             if "k" in key:
                     other = None
                     for iplayer in self.players:
-                        other = iplayer
-                        break
+                        if iplayer.id != player.id:
+                            other = iplayer
+                            break
                     player.hit(other)
-                    logging.info(f'Other {other}')
+                    logging.info(f'Other {other.id} : health = {other.health}')
                     return{'id': other.id, 'data': {'hp' : other.health}}
             self.collider()
             player.update(key)
@@ -109,8 +110,10 @@ class Combat :
                 if player.position_x < 0:
                     player.position_x = 0
 
-                 # handle player collision
+                # TODO check limit arena on collision
+                # handle player collision
                 for other in self.players:
                     if other.id != player.id and is_colliding(player, other):
                         logging.info(f'Player {player.id} is colliding with player {other.id}')
-                        player.position_x = ARENA_SIZE - other.position_x + 2 * player.size_x
+                        player.position_x = ARENA_SIZE - other.position_x - 2 * player.size_x
+                        logging.info(f'Player {player.position_x} and other : {other.position_x} ')
