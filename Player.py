@@ -5,7 +5,7 @@ from Config import ARENA_SIZE
 import logging
 
 class Player :
-    def __init__(self, id, name):
+    def init(self, id, name):
 
         self.id = id
         self.name = name
@@ -15,7 +15,7 @@ class Player :
         self.attack = False
         self.guard = False
         self.size_x = 120
-        self.last_action = 0
+        self.last_action = datetime.now
         self.ko = False
 
 
@@ -28,14 +28,14 @@ class Player :
 
        if "d" in key:
             self.position_x +=25
-    
+
        if "s" in key:
             self.position_x -=25
 
        if "l" in key:
             self.guard = True
-                    
-     
+
+
        return key
 
     def hitbox(self):      #set la hitbox
@@ -47,10 +47,7 @@ class Player :
         self.attack = True
         if self.hitbox() <= other.hitbox() and not other.guard and not self.guard:
             other.health -=25
-            if other.health == 0:
-               return self.ko == True
-            return self.ko == False
+            if other.health <= 0:
+               return True
             time.sleep(1)
             self.attack = False
-
-       
