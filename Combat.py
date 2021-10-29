@@ -4,64 +4,77 @@ from Player import Player
 from datetime import datetime
 import asyncio
 import logging
+from blinker import signal
+
 logging.getLogger().setLevel(logging.INFO)
 
 class Combat :
     
     def __init__(self):
 
-        self.players = []
-        self.start_time = 0
-        self.timer = 0
-        self.afk_limit = 10
-             
+            self.players = []
+            # self.id_combat = id_combat
+            self.seconds = seconds
+            self.start_time = 0
+            self.timer = 0
+            self.afk_limit = 10
+            self.time_limit = seconds
+
+    
             
     def increment_timer(self):
-
             time.sleep(1)
             new_time = datetime.now()
             self.timer = new_time - self.start_time
+            
+            # Send timer update
+            sig = signal('timer')
+            sig.send(self.timer)
+
             self.check_afk()
+            
+            # Check game ended
+            if self.timer.seconds >= self.time_limit:
+                sig = signal('game_ended')
+                sig.send('timeout')
+                self.restart()
+                return
+
             self.increment_timer()
 
-
-    def launch_timer(self):
-            self.timer = 0
-            self.start_time = datetime.now()
-            self.increment_timer()
-
-
-
-    def initCombat(self, p1x, p1y,p2x, p2y, timer):
-
-            timer(seconds)
+    def restart(self):
+        logging.info("Combat is restarting")
+        for player in self.players:
+            player.health = 100
+        self.launch_timer()
 
 
 
-    def closeCombat(self,pscore, phealth, timer):
-            if phealth == 0 and timer > 0 :
-                    pscore += 0
-                    pscore += 1
 
-            # if timer == 0 :
+        time.sleep(1)
+        new_time = datetime.now()
+        self.timer = new_time - self.start_time
+        self.check_afk()
+        self.increment_timer()
 
 
     def check_afk(self):
-            logging.info(f'AFK DETECTED : {id}')
             for player in self.players:
                 current_time = datetime.now()
                 if (current_time - player.last_action).seconds > self.afk_limit:
                         self.players.remove(player)
+                        logging.info(f'Player id:{player.id} was removed for inactivity')
 
-    def add_player(self, id, name):
-            logging.info(f'Player added with id: {id}')
-            if len(self.players) < 2:
-                self.players.append(Player(id, name))
-                return True      
-            return False
+    def closeCombat(self,pscore, phealth, timer):
+        if phealth == 0 and timer > 0 :
+                pscore += 0
+                pscore += 1
+
+        # if timer == 0 :
 
 
-    def get_player(self, id):
+    def check_afk(self):
+        logging.info(f'AFK DETECTED : {id}')
         for player in self.players:
             if id == player.id:
                 return player
@@ -77,26 +90,28 @@ class Combat :
                     break
                 player.hit(other)
                 return{'id': other.id, 'data': {'hp' : other.health}}
+        self.collider()
         player.update(key)
         return {'id' : id, 'position_x' : player.position_x, 'guard ' : player.guard, 'attack' : player.attack}
         
 
 
     def collider(self):
-        logging.info(f'check position1 : {position1} and position2 : {position2} and ARENA_SIZE : {ARENA_SIZE}')
         def is_colliding(player1, player2):
-            if abs(player2.position_x - player2.position_x) < 2 * player1.size_x:
+            p2_mirrored = ARENA_SIZE - player2.position_x
+            if abs(p2_mirrored - player1.position_x) < 2 * player1.size_x:
                 return True
             return False
 
-        for player in self.player:
+        for player in self.players:
                 # handle arena_size boundaries
+            logging.info(f'Checking player {player.id} position {player.position_x}')
             if player.position_x + player.size_x > ARENA_SIZE:
                     player.position_x = ARENA_SIZE - player.size_x
             if player.position_x < 0:
                 player.position_x = 0
 
                 # handle player collision
-            for other in self.player:
+            for other in self.players:
                 if other.id != player.id and is_colliding(player, other):
-                    player.position_x = ARENA_SIZE + other.position_x
+                    player.position_x = ARENA_SIZE - other.position_x + 2 * player.size_x
