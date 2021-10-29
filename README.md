@@ -30,6 +30,7 @@ C'est pourquoi :
 * player est la classe qui définit les attrubuts et méthode des joueurs
 * combat est la classe qui détermine les modalités d'une partie de jeu tels.
 * room.py est le fichier de lancement, il est composé de la classe Room et de la fonction main. La classe room instancie une room d'une partie qui communique avec différents services. La fonction main permet de se connecter au serveur mqtt, d'instancier la classe room et d'écouter les topics définit. 
+* Le main permet de tester le jeu indépendamment du reste. Test tel que les déplacements, l'attaque, la garde, la collision
 
 
 ## Fabriqué avec
