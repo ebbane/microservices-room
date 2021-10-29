@@ -29,12 +29,13 @@ def main():
     for i in range(0, 29):
         game.update_player(4, 'd')
 
-    # Colliding with player
-    game.update_player(4, 'd')
-    
-    # hit other
-    data = {'id': 3, 'key': 'k'}
-    game.update_player(data['id'], 'k')
+    # Colliding with player and player hit and other guard 
+    for i in range(0, 3):
+        game.update_player(4, 'l')
+        data = {'id': 3, 'key': 'k'}
+        game.update_player(data['id'], 'k')
+        
+
 
 
 if __name__ == "__main__":
