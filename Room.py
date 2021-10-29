@@ -43,7 +43,7 @@ class Room():
         topic='game/result'     # set topic
         if msg == 'timeout' :  
             payload = { 'equality' : 'True', 'idUser_Win' : Player[0] , 'idUser_Los' : Player[1] }        
-            self.send_topic(topic, msg)
+            self.send_topic(topic, payload)
         else :
             self.send_topic(topic, msg)  
     
