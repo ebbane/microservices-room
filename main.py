@@ -2,7 +2,7 @@ import logging
 import time
 from Combat import * 
 import Player
-from mqttClient import * 
+# from mqttClient import * 
 
 class Room():
     def __init__(self):
@@ -39,49 +39,34 @@ class Room():
 
 # --------------------------------------------------
 
-
 def main():
 
-    # ---------------------------------
-    # Initializing MQTT
-    mqtt_client = MQTTClient(['client/newplayer', 'room/player' ])
-    mqtt_client.setup()
-    mqtt_client.run()
 
-    # ---------------------------------
-    # TODO: Start my application
-    app = Room()
-    
-    
-    def listen_topic():
-        
-        def on_message_room_connexion(msg):
-            app.on_player_connexion(msg)        
-    
-        sig = signal('client/newplayer')
-        sig.connect(on_message_room_connexion)
-        
-        def on_message_player(msg):
-            app.on_player_action(msg)        
-    
-        sig = signal('room/player')
-        sig.connect(on_message_player)
-        
-       
-        
-    listen_topic()
-    game = Combat()
-    game.launch_timer() 
-    
-    # i=1
-    # while True :
-    #     i+=1
-    # mqtt_client.wait() 
+    game = Combat(1, 90)
 
 
-    # ---------------------------------
-    # Closing connection
-    # mqtt_client.stop()
 
-if __name__ == "__main__":
-    main()
+    id = 3
+    data = { 'name': 'Thor'}
+    game.add_player(3, data)
+
+    id = 4
+    data = { 'name': 'Odin'}
+    game.add_player(id, data)
+
+    id = 5
+    data = { 'name': 'NotAdded'}
+    game.add_player(id, data)
+
+    for pos in range(0, 500):
+        data = { 'id': 3, 'pos_x': pos}
+        game.update_player(data['id'], data)
+        data = {'id': 4, 'key': 'k'}
+        game.update_player(data['id'], 'k')
+        data = {'id': 3, 'key': 'l'}
+        game.update_player(data['id'], 'l')
+
+    # game.launch_timer()
+
+if __name__ == "main":
+       main()
