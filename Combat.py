@@ -89,8 +89,8 @@ class Combat :
                     logging.info(f'Other {other}')
                     return{'id': other.id, 'data': {'hp' : other.health}}
             self.collider()
-            logging.info(f'Player {player}')
             player.update(key)
+            logging.info(f'Player {player.id} position {player.position_x}')
             return {'id' : id, 'position_x' : player.position_x, 'guard ' : player.guard, 'attack' : player.attack}
             
 
@@ -112,4 +112,5 @@ class Combat :
                  # handle player collision
                 for other in self.players:
                     if other.id != player.id and is_colliding(player, other):
+                        logging.info(f'Player {player.id} is colliding with player {other.id}')
                         player.position_x = ARENA_SIZE - other.position_x + 2 * player.size_x

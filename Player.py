@@ -6,12 +6,10 @@ import logging
 
 class Player :
     def __init__(self, id, name):
-
         self.id = id
         self.name = name
         self.health = 100
-        self.position_x = 310
-        self.position_y = 400
+        self.position_x = 50
         self.attack = False
         self.guard = False
         self.size_x = 120

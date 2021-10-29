@@ -44,8 +44,6 @@ def main():
     logging.warning(f'coucou')
     game = Combat()
 
-
-
     id = 3
     data = { 'name': 'Thor'}
     game.add_player(3, data)
@@ -58,13 +56,21 @@ def main():
     data = { 'name': 'NotAdded'}
     game.add_player(id, data)
 
-    for pos in range(0, 10):
-        data = { 'id': 3, 'pos_x': pos}
-        game.update_player(data['id'], data)
-        data = {'id': 4, 'key': 'k'}
-        game.update_player(data['id'], 'k')
-        data = {'id': 3, 'key': 'l'}
-        game.update_player(data['id'], 'l')
+    game.update_player(3, 'q')
+    for i in range(0, 29):
+        game.update_player(4, 'd')
+
+    # Colliding with player
+    game.update_player(4, 'd')
+
+    # game.update_player(3)
+    # for pos in range(0, 10):
+    #     data = { 'id': 3, 'pos_x': pos}
+    #     game.update_player(data['id'], data)
+    #     data = {'id': 4, 'key': 'k'}
+    #     game.update_player(data['id'], 'k')
+    #     data = {'id': 3, 'key': 'l'}
+    #     game.update_player(data['id'], 'l')
 
     # game.launch_timer()
 
