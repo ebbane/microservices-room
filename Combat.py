@@ -86,8 +86,10 @@ class Combat :
                         other = iplayer
                         break
                     player.hit(other)
+                    logging.info(f'Other {other}')
                     return{'id': other.id, 'data': {'hp' : other.health}}
             self.collider()
+            logging.info(f'Player {player}')
             player.update(key)
             return {'id' : id, 'position_x' : player.position_x, 'guard ' : player.guard, 'attack' : player.attack}
             
@@ -102,7 +104,6 @@ class Combat :
     
             for player in self.players:
                  # handle arena_size boundaries
-                logging.info(f'Checking player {player.id} position {player.position_x}')
                 if player.position_x + player.size_x > ARENA_SIZE:
                        player.position_x = ARENA_SIZE - player.size_x
                 if player.position_x < 0:

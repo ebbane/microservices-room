@@ -3,6 +3,7 @@ import time
 from Combat import * 
 import Player
 # from mqttClient import * 
+logging.getLogger().setLevel(logging.INFO)
 
 class Room():
     def __init__(self):
@@ -40,9 +41,8 @@ class Room():
 # --------------------------------------------------
 
 def main():
-
-
-    game = Combat(1, 90)
+    logging.warning(f'coucou')
+    game = Combat()
 
 
 
@@ -58,7 +58,7 @@ def main():
     data = { 'name': 'NotAdded'}
     game.add_player(id, data)
 
-    for pos in range(0, 500):
+    for pos in range(0, 10):
         data = { 'id': 3, 'pos_x': pos}
         game.update_player(data['id'], data)
         data = {'id': 4, 'key': 'k'}
@@ -68,5 +68,5 @@ def main():
 
     # game.launch_timer()
 
-if __name__ == "main":
-       main()
+if __name__ == "__main__":
+    main()
